@@ -16,12 +16,18 @@ public class SpringbootJdbcApiApplication implements CommandLineRunner {
 	@Autowired
 	PlayerDAO playerDao;
 
+	@Autowired
+	TournamentDAO tournamentDAO;
+
 	public static void main(String[] args) {
 		SpringApplication.run(SpringbootJdbcApiApplication.class, args);
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
+		tournamentDAO.createTournamentTable();
+
+		/*
 		logger.info("Inserting Player 4: {}", playerDao.insertPlayer(
 				new Player (4, "Thiem", "Austria", new Date(System.currentTimeMillis()), 17 ))
 		);
@@ -35,5 +41,6 @@ public class SpringbootJdbcApiApplication implements CommandLineRunner {
 		logger.info("All Players Data: {}", playerDao.getAllPlayers());
 
 		logger.info("Player with Id 3: {}", playerDao.getPlayerById(3));
+		 */
 	}
 }

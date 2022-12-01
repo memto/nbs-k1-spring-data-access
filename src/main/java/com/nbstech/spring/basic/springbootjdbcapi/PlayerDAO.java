@@ -13,6 +13,12 @@ public class PlayerDAO {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
+    public void createTournamentTable() {
+        String sql = "CREATE TABLE TOURNAMENT (ID INTEGER, NAME VARCHAR(50), LOCATION VARCHAR(50), PRIMARY KEY (ID))";
+        jdbcTemplate.execute(sql);
+        System.out.println("Table created");
+    }
+
     public List<Player> getAllPlayers() {
         String sql = "SELECT * FROM PLAYER";
 //        String sql = "SELECT id, name FROM PLAYER";
