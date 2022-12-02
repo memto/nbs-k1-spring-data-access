@@ -1,5 +1,7 @@
 package com.nbstech.spring.basic.dataaccess;
 
+import com.nbstech.spring.basic.dataaccess.SpringDataJPA.PlayerEntity;
+import com.nbstech.spring.basic.dataaccess.SpringDataJPA.PlayerRepository;
 import com.nbstech.spring.basic.dataaccess.SpringJdbcApi.PlayerDAO;
 import com.nbstech.spring.basic.dataaccess.SpringJdbcApi.TournamentDAO;
 import org.slf4j.Logger;
@@ -9,9 +11,14 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.sql.Date;
+
 @SpringBootApplication
 public class SpringbootDataAccessApplication implements CommandLineRunner {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+	@Autowired
+	PlayerRepository playerRepository;
 
 	@Autowired
 	PlayerDAO playerDao;
@@ -25,6 +32,35 @@ public class SpringbootDataAccessApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+//		SpringJdbcApi();
+
+		SpringDataJPA();
+	}
+
+	private void SpringDataJPA() {
+		// ex1
+		logger.info("\n\n>> Inserting Player: {}\n", playerRepository.insertPlayer(
+				new PlayerEntity("Djokovic", "Serbia", Date.valueOf("1987-05-22"), 81)));
+
+		logger.info("\n\n>> Inserting Player: {}\n", playerRepository.insertPlayer(
+				new PlayerEntity("Monfils", "France", Date.valueOf("1986-09-01"), 10)));
+
+		// ex2
+		logger.info("\n\n>> Player with id 2: {}\n", playerRepository.getPlayerById(2));
+
+		// ex3
+		logger.info("\n\n>> Inserting Player: {}\n", playerRepository.insertPlayer(
+				new PlayerEntity("Thiem", "Austria",
+						new Date(System.currentTimeMillis()), 17)));
+		logger.info("\n\n>> Updating Player with Id 3: {}\n", playerRepository.updatePlayer(
+				new PlayerEntity(3, "Thiem", "Austria", Date.valueOf("1993-09-03"), 17)));
+		logger.info("\n\n>> Player with id 3: {}\n", playerRepository.getPlayerById(3));
+
+		//delete player
+		playerRepository.deleteById(2);
+	}
+
+	private void SpringJdbcApi() {
 		tournamentDAO.createTournamentTable();
 
 		logger.info("French Players: {}", playerDao.getPlayerByNationality("France"));

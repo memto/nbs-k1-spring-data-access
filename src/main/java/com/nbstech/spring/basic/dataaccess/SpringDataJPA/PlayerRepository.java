@@ -12,4 +12,23 @@ public class PlayerRepository {
 
     @PersistenceContext
     EntityManager entityManager;
+
+    public PlayerEntity insertPlayer(PlayerEntity player)
+    {
+        return entityManager.merge(player);
+    }
+
+    public PlayerEntity updatePlayer(PlayerEntity player)
+    {
+        return entityManager.merge(player);
+    }
+
+    public PlayerEntity getPlayerById(int id) {
+        return entityManager.find(PlayerEntity.class, id);
+    }
+
+    public void deleteById(int id){
+        PlayerEntity player = entityManager.find(PlayerEntity.class, id);
+        entityManager.remove(player);
+    }
 }
