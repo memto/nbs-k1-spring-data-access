@@ -58,6 +58,8 @@ public class SpringbootDataAccessApplication implements CommandLineRunner {
 
 		//delete player
 		playerRepository.deleteById(2);
+
+		logger.info("\n\n>> All Players Data: {}", playerRepository.getAllPlayers());
 	}
 
 	private void SpringJdbcApi() {

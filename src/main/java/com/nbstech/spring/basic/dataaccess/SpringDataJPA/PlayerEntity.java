@@ -1,13 +1,11 @@
 package com.nbstech.spring.basic.dataaccess.SpringDataJPA;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name="PlayerTable")
+@NamedQuery(name="get_all_players", query="select p from PlayerEntity p")
 public class PlayerEntity {
     @Id
     @GeneratedValue
