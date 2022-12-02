@@ -2,6 +2,7 @@ package com.nbstech.spring.basic.dataaccess;
 
 import com.nbstech.spring.basic.dataaccess.SpringDataJPA.PlayerEntity;
 import com.nbstech.spring.basic.dataaccess.SpringDataJPA.PlayerRepository;
+import com.nbstech.spring.basic.dataaccess.SpringDataJPA.SpringDataPlayerRepository;
 import com.nbstech.spring.basic.dataaccess.SpringJdbcApi.PlayerDAO;
 import com.nbstech.spring.basic.dataaccess.SpringJdbcApi.TournamentDAO;
 import org.slf4j.Logger;
@@ -21,6 +22,9 @@ public class SpringbootDataAccessApplication implements CommandLineRunner {
 	PlayerRepository playerRepository;
 
 	@Autowired
+	SpringDataPlayerRepository springDataPlayerRepository;
+
+	@Autowired
 	PlayerDAO playerDao;
 
 	@Autowired
@@ -34,7 +38,29 @@ public class SpringbootDataAccessApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 //		SpringJdbcApi();
 
-		SpringDataJPA();
+//		SpringDataJPA();
+
+		SpringDataRepositoryEx();
+	}
+
+	private void SpringDataRepositoryEx() {
+		//Inserting rows
+		logger.info("Inserting Player: {}", springDataPlayerRepository.save(new PlayerEntity("Djokovic", "Serbia",
+				Date.valueOf("1987-05-22"), 81)));
+		logger.info("Inserting Player: {}", springDataPlayerRepository.save(new PlayerEntity("Monfils", "France",
+				Date.valueOf("1986-09-01"), 10)));
+		logger.info("Inserting Player: {}", springDataPlayerRepository.save(new PlayerEntity("Thiem", "Austria",
+				new Date(System.currentTimeMillis()), 17)));
+
+		//Updating row
+		logger.info("Updating Player with Id 3: {}", springDataPlayerRepository.save(new PlayerEntity(3, "Thiem", "Austria",
+				Date.valueOf("1993-09-03"), 17)));
+
+		logger.info("Player with Id 2: {}", springDataPlayerRepository.findById(2));
+
+		logger.info("All Players Data: {}", springDataPlayerRepository.findAll());
+
+		springDataPlayerRepository.deleteById(2);
 	}
 
 	private void SpringDataJPA() {
