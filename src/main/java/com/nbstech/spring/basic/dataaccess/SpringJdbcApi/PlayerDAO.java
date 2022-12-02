@@ -1,4 +1,4 @@
-package com.nbstech.spring.basic.springbootjdbcapi;
+package com.nbstech.spring.basic.dataaccess.SpringJdbcApi;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
