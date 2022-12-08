@@ -3,7 +3,7 @@ package com.nbstech.spring.basic.dataaccess.Relationships.OneToOne.Entity;
 import javax.persistence.*;
 
 @Entity
-public class Player {
+public class PlayerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -12,21 +12,21 @@ public class Player {
 
     @OneToOne(cascade=CascadeType.ALL)//, optional = false)
     @JoinColumn(name = "profile_id", referencedColumnName = "id")
-    private PlayerProfile playerProfile;
+    private PlayerProfileEntity playerProfileEntity;
 
-    public Player( ) {
+    public PlayerEntity( ) {
 
     }
 
-    public Player(String name) {
+    public PlayerEntity(String name) {
         super();
         this.name = name;
     }
 
-    public Player(String name, PlayerProfile profile) {
+    public PlayerEntity(String name, PlayerProfileEntity profile) {
         super();
         this.name = name;
-        this.playerProfile = profile;
+        this.playerProfileEntity = profile;
     }
 
     public int getId() {
@@ -45,16 +45,16 @@ public class Player {
         this.name = name;
     }
 
-    public PlayerProfile getPlayerProfile() {
-        return playerProfile;
+    public PlayerProfileEntity getPlayerProfile() {
+        return playerProfileEntity;
     }
 
-    public void setPlayerProfile(PlayerProfile playerProfile) {
-        this.playerProfile = playerProfile;
+    public void setPlayerProfile(PlayerProfileEntity playerProfileEntity) {
+        this.playerProfileEntity = playerProfileEntity;
     }
 
     @Override
     public String toString() {
-        return "Player [id=" + id + ", name=" + name + ", playerProfile=" + playerProfile + "]";
+        return "Player [id=" + id + ", name=" + name + ", playerProfile=" + playerProfileEntity + "]";
     }
 }

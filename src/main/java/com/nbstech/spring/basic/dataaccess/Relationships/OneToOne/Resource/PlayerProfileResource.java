@@ -1,6 +1,6 @@
 package com.nbstech.spring.basic.dataaccess.Relationships.OneToOne.Resource;
 
-import com.nbstech.spring.basic.dataaccess.Relationships.OneToOne.Entity.PlayerProfile;
+import com.nbstech.spring.basic.dataaccess.Relationships.OneToOne.Entity.PlayerProfileEntity;
 import com.nbstech.spring.basic.dataaccess.Relationships.OneToOne.Service.PlayerProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,25 +11,25 @@ import java.util.List;
 @RequestMapping("/player-profiles")
 public class PlayerProfileResource {
     @Autowired
-    PlayerProfileService service;
+    PlayerProfileService playerProfileService;
 
     @GetMapping
-    public List<PlayerProfile> allPlayerProfiles() {
-        return service.allPlayerProfiles();
+    public List<PlayerProfileEntity> allPlayerProfiles() {
+        return playerProfileService.allPlayerProfiles();
     }
 
     @GetMapping("/{id}")
-    public PlayerProfile getPlayerProfile(@PathVariable int id){
-        return service.getPlayerProfile(id);
+    public PlayerProfileEntity getPlayerProfile(@PathVariable int id){
+        return playerProfileService.getPlayerProfile(id);
     }
 
     @PostMapping
-    public PlayerProfile addPlayerProfile(@RequestBody PlayerProfile playerProfile) {
-        return service.addPlayerProfile(playerProfile);
+    public PlayerProfileEntity addPlayerProfile(@RequestBody PlayerProfileEntity playerProfileEntity) {
+        return playerProfileService.addPlayerProfile(playerProfileEntity);
     }
 
     @DeleteMapping("/{id}")
     public void deletePlayerProfile(@PathVariable int id) {
-        service.deletePlayerProfile(id);
+        playerProfileService.deletePlayerProfile(id);
     }
 }
