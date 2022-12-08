@@ -6,17 +6,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class PlayerProfile {
+public class PlayerProfileEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String twitter;
 
-    public PlayerProfile() {
+    public PlayerProfileEntity() {
     }
 
-    public PlayerProfile(String twitter) {
+    public PlayerProfileEntity(String twitter) {
         super();
         this.twitter = twitter;
     }
