@@ -1,5 +1,7 @@
 package com.nbstech.spring.basic.dataaccess.Relationships.OneToOne.Entity;
 
+import com.nbstech.spring.basic.dataaccess.Relationships.OneToOne.Entity.Collections.Address;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,6 +11,9 @@ public class PlayerEntity {
     private int id;
 
     private String name;
+
+    @Embedded
+    private Address address;
 
     @OneToOne(cascade=CascadeType.ALL)//, optional = false)
     @JoinColumn(name = "profile_id", referencedColumnName = "id")
@@ -43,6 +48,14 @@ public class PlayerEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public PlayerProfileEntity getPlayerProfile() {
