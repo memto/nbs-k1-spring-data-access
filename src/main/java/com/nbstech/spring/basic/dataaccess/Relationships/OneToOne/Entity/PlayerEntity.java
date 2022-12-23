@@ -3,6 +3,8 @@ package com.nbstech.spring.basic.dataaccess.Relationships.OneToOne.Entity;
 import com.nbstech.spring.basic.dataaccess.Relationships.OneToOne.Entity.Collections.Address;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class PlayerEntity {
@@ -14,6 +16,9 @@ public class PlayerEntity {
 
     @Embedded
     private Address address;
+
+    @ElementCollection
+    private Set<Address> travelAddresses = new HashSet<>();
 
     @OneToOne(cascade=CascadeType.ALL)//, optional = false)
     @JoinColumn(name = "profile_id", referencedColumnName = "id")
