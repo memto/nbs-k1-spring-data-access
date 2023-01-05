@@ -13,9 +13,9 @@ import java.sql.SQLException;
 //@SpringBootApplication // @SpringBootApplication = @Configuration + @EnableAutoConfiguration + @ComponentScan
 //@Configuration
 @EnableAutoConfiguration
-@ComponentScan(basePackages = "com.nbstech.spring.basic.dataaccess.Relationships.OneToOne.*")
-@EntityScan(basePackages = "com.nbstech.spring.basic.dataaccess.Relationships.OneToOne.*")
-@EnableJpaRepositories("com.nbstech.spring.basic.dataaccess.Relationships.OneToOne.*")
+@ComponentScan(basePackages = "com.nbstech.spring.basic.dataaccess.Hibernate.*")
+@EntityScan(basePackages = "com.nbstech.spring.basic.dataaccess.Hibernate.*")
+@EnableJpaRepositories("com.nbstech.spring.basic.dataaccess.Hibernate.*")
 public class SpringbootDataAccessApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringbootDataAccessApplication.class, args);
