@@ -8,8 +8,9 @@ import java.util.Date;
 @NamedQuery(name="get_all_players", query="select p from PlayerEntity p")
 public class PlayerEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
+
     private String name;
     private String nationality;
 

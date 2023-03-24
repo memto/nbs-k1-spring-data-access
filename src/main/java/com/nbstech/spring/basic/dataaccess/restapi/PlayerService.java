@@ -28,6 +28,10 @@ public class PlayerService {
     }
 
     //Add a player
+    public PlayerEntity addPlayer(PlayerEntity p) {
+        return playerRepository.save(p);
+    }
+
 
     //Update a player
 
