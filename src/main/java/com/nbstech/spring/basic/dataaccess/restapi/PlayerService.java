@@ -2,6 +2,7 @@ package com.nbstech.spring.basic.dataaccess.restapi;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
@@ -55,7 +56,7 @@ public class PlayerService {
         }
     }
 
-    //Partial update
+    // Partial update
     public PlayerEntity patchPlayer( int id, Map<String, Object> partialPlayer) {
         Optional<PlayerEntity> playerEntityOpt = playerRepository.findById(id);
 
@@ -74,5 +75,17 @@ public class PlayerService {
             throw new RuntimeException("Player with id {"+ id +"} not found");
         }
     }
+
+    // Update a single field
+    @Transactional
+    public void updateTitles(int id, int titles) {
+        Optional<PlayerEntity> tempPlayer = playerRepository.findById(id);
+
+        if(tempPlayer.isEmpty())
+            throw new RuntimeException("Player with id {"+ id +"} not found");
+
+        playerRepository.updateTitles(id, titles);
+    }
+
     //delete a player
 }
