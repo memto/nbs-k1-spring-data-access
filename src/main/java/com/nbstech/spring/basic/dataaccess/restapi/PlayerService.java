@@ -87,5 +87,13 @@ public class PlayerService {
         playerRepository.updateTitles(id, titles);
     }
 
-    //delete a player
+    // Delete a player
+    public void deletePlayer(int id) {
+        Optional<PlayerEntity> tempPlayer = playerRepository.findById(id);
+
+        if(tempPlayer.isEmpty())
+            throw new RuntimeException("Player with id {"+ id +"} not found");
+
+        playerRepository.delete(tempPlayer.get());
+    }
 }
