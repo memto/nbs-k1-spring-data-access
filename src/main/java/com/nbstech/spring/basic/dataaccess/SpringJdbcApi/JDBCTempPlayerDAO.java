@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @Repository
-public class PlayerDAO {
+public class JDBCTempPlayerDAO {
     @Autowired
     JdbcTemplate jdbcTemplate;
 

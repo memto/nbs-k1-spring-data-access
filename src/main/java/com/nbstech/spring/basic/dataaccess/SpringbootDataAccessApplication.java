@@ -1,9 +1,9 @@
 package com.nbstech.spring.basic.dataaccess;
 
 import com.nbstech.spring.basic.dataaccess.SpringDataJPA.PlayerEntity;
+import com.nbstech.spring.basic.dataaccess.SpringDataJPA.PersistenceCtxPlayerDAO;
 import com.nbstech.spring.basic.dataaccess.SpringDataJPA.PlayerRepository;
-import com.nbstech.spring.basic.dataaccess.SpringDataJPA.SpringDataJpaPlayerRepository;
-import com.nbstech.spring.basic.dataaccess.SpringJdbcApi.PlayerDAO;
+import com.nbstech.spring.basic.dataaccess.SpringJdbcApi.JDBCTempPlayerDAO;
 import com.nbstech.spring.basic.dataaccess.SpringJdbcApi.TournamentDAO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,13 +19,13 @@ public class SpringbootDataAccessApplication implements CommandLineRunner {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
+	PersistenceCtxPlayerDAO persistenceCtxPlayerDAO;
+
+	@Autowired
 	PlayerRepository playerRepository;
 
 	@Autowired
-	SpringDataJpaPlayerRepository springDataJpaPlayerRepository;
-
-	@Autowired
-	PlayerDAO playerDao;
+	JDBCTempPlayerDAO playerDao;
 
 	@Autowired
 	TournamentDAO tournamentDAO;
@@ -38,54 +38,54 @@ public class SpringbootDataAccessApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 //		SpringJdbcApi();
 
-//		SpringDataJPA();
+//		SpringDataPersistenceCtx();
 
 		SpringDataRepositoryEx();
 	}
 
 	private void SpringDataRepositoryEx() {
 		//Inserting rows
-		logger.info("Inserting Player: {}", springDataJpaPlayerRepository.save(new PlayerEntity("Djokovic", "Serbia",
+		logger.info("Inserting Player: {}", playerRepository.save(new PlayerEntity("Djokovic", "Serbia",
 				Date.valueOf("1987-05-22"), 81)));
-		logger.info("Inserting Player: {}", springDataJpaPlayerRepository.save(new PlayerEntity("Monfils", "France",
+		logger.info("Inserting Player: {}", playerRepository.save(new PlayerEntity("Monfils", "France",
 				Date.valueOf("1986-09-01"), 10)));
-		logger.info("Inserting Player: {}", springDataJpaPlayerRepository.save(new PlayerEntity("Thiem", "Austria",
+		logger.info("Inserting Player: {}", playerRepository.save(new PlayerEntity("Thiem", "Austria",
 				new Date(System.currentTimeMillis()), 17)));
 
 		//Updating row
-		logger.info("Updating Player with Id 3: {}", springDataJpaPlayerRepository.save(new PlayerEntity(3, "Thiem", "Austria",
+		logger.info("Updating Player with Id 3: {}", playerRepository.save(new PlayerEntity(3, "Thiem", "Austria",
 				Date.valueOf("1993-09-03"), 17)));
 
-		logger.info("Player with Id 2: {}", springDataJpaPlayerRepository.findById(2));
+		logger.info("Player with Id 2: {}", playerRepository.findById(2));
 
-		logger.info("All Players Data: {}", springDataJpaPlayerRepository.findAll());
+		logger.info("All Players Data: {}", playerRepository.findAll());
 
-		springDataJpaPlayerRepository.deleteById(2);
+		playerRepository.deleteById(2);
 	}
 
-	private void SpringDataJPA() {
+	private void SpringDataPersistenceCtx() {
 		// ex1
-		logger.info("\n\n>> Inserting Player: {}\n", playerRepository.insertPlayer(
+		logger.info("\n\n>> Inserting Player: {}\n", persistenceCtxPlayerDAO.insertPlayer(
 				new PlayerEntity("Djokovic", "Serbia", Date.valueOf("1987-05-22"), 81)));
 
-		logger.info("\n\n>> Inserting Player: {}\n", playerRepository.insertPlayer(
+		logger.info("\n\n>> Inserting Player: {}\n", persistenceCtxPlayerDAO.insertPlayer(
 				new PlayerEntity("Monfils", "France", Date.valueOf("1986-09-01"), 10)));
 
 		// ex2
-		logger.info("\n\n>> Player with id 2: {}\n", playerRepository.getPlayerById(2));
+		logger.info("\n\n>> Player with id 2: {}\n", persistenceCtxPlayerDAO.getPlayerById(2));
 
 		// ex3
-		logger.info("\n\n>> Inserting Player: {}\n", playerRepository.insertPlayer(
+		logger.info("\n\n>> Inserting Player: {}\n", persistenceCtxPlayerDAO.insertPlayer(
 				new PlayerEntity("Thiem", "Austria",
 						new Date(System.currentTimeMillis()), 17)));
-		logger.info("\n\n>> Updating Player with Id 3: {}\n", playerRepository.updatePlayer(
+		logger.info("\n\n>> Updating Player with Id 3: {}\n", persistenceCtxPlayerDAO.updatePlayer(
 				new PlayerEntity(3, "Thiem", "Austria", Date.valueOf("1993-09-03"), 17)));
-		logger.info("\n\n>> Player with id 3: {}\n", playerRepository.getPlayerById(3));
+		logger.info("\n\n>> Player with id 3: {}\n", persistenceCtxPlayerDAO.getPlayerById(3));
 
 		//delete player
-		playerRepository.deleteById(2);
+		persistenceCtxPlayerDAO.deleteById(2);
 
-		logger.info("\n\n>> All Players Data: {}", playerRepository.getAllPlayers());
+		logger.info("\n\n>> All Players Data: {}", persistenceCtxPlayerDAO.getAllPlayers());
 	}
 
 	private void SpringJdbcApi() {
