@@ -2,8 +2,11 @@ package com.nbstech.spring.basic.dataaccess.restapi;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ReflectionUtils;
 
+import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -53,6 +56,23 @@ public class PlayerService {
     }
 
     //Partial update
+    public PlayerEntity patchPlayer( int id, Map<String, Object> partialPlayer) {
+        Optional<PlayerEntity> playerEntityOpt = playerRepository.findById(id);
 
+        if(playerEntityOpt.isPresent()) {
+            PlayerEntity playerEntity = playerEntityOpt.get();
+
+            partialPlayer.forEach( (key, value) -> {
+                System.out.println("Key: " + key + " Value: " + value);
+                Field field = ReflectionUtils.findField(PlayerEntity.class, key);
+                ReflectionUtils.makeAccessible(field);
+                ReflectionUtils.setField(field, playerEntity, value);
+            });
+
+            return playerRepository.save(playerEntity);
+        } else {
+            throw new RuntimeException("Player with id {"+ id +"} not found");
+        }
+    }
     //delete a player
 }

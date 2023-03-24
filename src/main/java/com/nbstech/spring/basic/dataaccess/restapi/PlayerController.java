@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class PlayerController {
@@ -36,4 +37,8 @@ public class PlayerController {
         return playerService.updatePlayer(id, p);
     }
 
+    @PatchMapping("/players/{id}")
+    public PlayerEntity partialUpdate(@PathVariable int id, @RequestBody Map<String, Object> playerPatch) {
+        return playerService.patchPlayer(id, playerPatch);
+    }
 }
