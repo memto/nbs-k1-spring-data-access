@@ -34,6 +34,23 @@ public class PlayerService {
 
 
     //Update a player
+    public PlayerEntity updatePlayer(int id, PlayerEntity p) {
+        Optional<PlayerEntity> playerEntityOpt = playerRepository.findById(id);
+
+        if (playerEntityOpt.isEmpty())
+            throw new RuntimeException("Player with id {"+ id +"} not found");
+        else {
+            PlayerEntity playerEntity = playerEntityOpt.get();
+
+            //update player details
+            playerEntity.setName(p.getName());
+            playerEntity.setNationality(p.getNationality());
+            playerEntity.setBirthDate(p.getBirthDate());
+            playerEntity.setTitles(p.getTitles());
+
+            return playerRepository.save(playerEntity);
+        }
+    }
 
     //Partial update
 
