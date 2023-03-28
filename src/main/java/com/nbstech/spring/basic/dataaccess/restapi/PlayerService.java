@@ -27,7 +27,7 @@ public class PlayerService {
         if (playerEntity.isPresent()) {
             return playerEntity.get();
         } else {
-            throw new RuntimeException("Player with id "+ id + " not found.");
+            throw new PlayerNotFoundException("Player with id "+ id + " not found.");
         }
     }
 
@@ -42,7 +42,7 @@ public class PlayerService {
         Optional<PlayerEntity> playerEntityOpt = playerRepository.findById(id);
 
         if (playerEntityOpt.isEmpty())
-            throw new RuntimeException("Player with id {"+ id +"} not found");
+            throw new PlayerNotFoundException("Player with id {"+ id +"} not found");
         else {
             PlayerEntity playerEntity = playerEntityOpt.get();
 
@@ -72,7 +72,7 @@ public class PlayerService {
 
             return playerRepository.save(playerEntity);
         } else {
-            throw new RuntimeException("Player with id {"+ id +"} not found");
+            throw new PlayerNotFoundException("Player with id {"+ id +"} not found");
         }
     }
 
@@ -82,7 +82,7 @@ public class PlayerService {
         Optional<PlayerEntity> tempPlayer = playerRepository.findById(id);
 
         if(tempPlayer.isEmpty())
-            throw new RuntimeException("Player with id {"+ id +"} not found");
+            throw new PlayerNotFoundException("Player with id {"+ id +"} not found");
 
         playerRepository.updateTitles(id, titles);
     }
@@ -92,7 +92,7 @@ public class PlayerService {
         Optional<PlayerEntity> tempPlayer = playerRepository.findById(id);
 
         if(tempPlayer.isEmpty())
-            throw new RuntimeException("Player with id {"+ id +"} not found");
+            throw new PlayerNotFoundException("Player with id {"+ id +"} not found");
 
         playerRepository.delete(tempPlayer.get());
     }
