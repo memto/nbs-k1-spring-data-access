@@ -1,14 +1,17 @@
 package com.nbstech.spring.basic.dataaccess.Hibernate.Dto;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Table(name = "USER_DETAILS")
 public class UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int userId;
 
     private String name;
 
@@ -16,7 +19,17 @@ public class UserDetails {
     private Address address;
 
     @ElementCollection
+    @JoinTable(name="USER_TRAVEL_ADDRESS",
+            joinColumns = @JoinColumn(name="USER_ID")
+    )
     private Set<Address> travelAddresses = new HashSet<>();
+
+    //    @ElementCollection(fetch = FetchType.LAZY) // default
+    @ElementCollection(fetch = FetchType.EAGER)
+    @JoinTable(name="USER_ADDRESS",
+            joinColumns = @JoinColumn(name="USER_ID")
+    )
+    private Collection<Address> listOfAddresses = new ArrayList<Address>();
 
     public UserDetails( ) {
 
@@ -27,13 +40,12 @@ public class UserDetails {
         this.name = name;
     }
 
-
-    public int getId() {
-        return id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getName() {
@@ -52,7 +64,12 @@ public class UserDetails {
         this.address = address;
     }
 
-
+    public Collection<Address> getListOfAddresses() {
+        return listOfAddresses;
+    }
+    public void setListOfAddresses(Collection<Address> listOfAddresses) {
+        this.listOfAddresses = listOfAddresses;
+    }
 
     @Override
     public String toString() {
