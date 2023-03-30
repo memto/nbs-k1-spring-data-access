@@ -1,4 +1,4 @@
-package com.nbstech.spring.basic.dataaccess.restapi;
+package com.nbstech.spring.basic.dataaccess.restapi.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

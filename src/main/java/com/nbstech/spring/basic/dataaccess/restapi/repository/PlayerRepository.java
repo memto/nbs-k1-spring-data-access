@@ -1,5 +1,6 @@
-package com.nbstech.spring.basic.dataaccess.restapi;
+package com.nbstech.spring.basic.dataaccess.restapi.repository;
 
+import com.nbstech.spring.basic.dataaccess.restapi.entity.PlayerEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

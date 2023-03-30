@@ -1,4 +1,4 @@
-package com.nbstech.spring.basic.dataaccess.restapi;
+package com.nbstech.spring.basic.dataaccess.restapi.dto;
 
 public class PlayerNotFoundException extends RuntimeException {
     public PlayerNotFoundException() {

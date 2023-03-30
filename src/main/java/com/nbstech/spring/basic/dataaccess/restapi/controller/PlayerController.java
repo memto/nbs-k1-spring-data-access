@@ -1,5 +1,7 @@
-package com.nbstech.spring.basic.dataaccess.restapi;
+package com.nbstech.spring.basic.dataaccess.restapi.controller;
 
+import com.nbstech.spring.basic.dataaccess.restapi.entity.PlayerEntity;
+import com.nbstech.spring.basic.dataaccess.restapi.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

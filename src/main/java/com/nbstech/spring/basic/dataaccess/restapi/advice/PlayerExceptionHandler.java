@@ -1,5 +1,7 @@
-package com.nbstech.spring.basic.dataaccess.restapi;
+package com.nbstech.spring.basic.dataaccess.restapi.advice;
 
+import com.nbstech.spring.basic.dataaccess.restapi.dto.PlayerErrorResponse;
+import com.nbstech.spring.basic.dataaccess.restapi.dto.PlayerNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

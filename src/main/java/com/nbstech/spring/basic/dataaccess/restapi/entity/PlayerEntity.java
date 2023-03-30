@@ -1,4 +1,4 @@
-package com.nbstech.spring.basic.dataaccess.restapi;
+package com.nbstech.spring.basic.dataaccess.restapi.entity;
 
 import javax.persistence.*;
 import java.util.Date;
